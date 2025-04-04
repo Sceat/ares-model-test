@@ -1,5 +1,4 @@
 import { createApp, provide } from 'vue';
-import { registerSW } from 'virtual:pwa-register';
 import Toast, { useToast } from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
 
@@ -15,12 +14,6 @@ const vue_app = createApp(app);
 const toast = useToast();
 
 vue_app.use(router).use(Toast).mount('#app');
-
-const updateSW = registerSW({
-  onOfflineReady() {
-    toast('ready to work offline!');
-  },
-});
 
 vue_app.config.compilerOptions.isCustomElement = tag => {
   if (tag.startsWith('el-')) return true;

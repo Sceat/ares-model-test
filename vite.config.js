@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  assetsInclude: ['**/*.gltf', '**/*.glb', '**/*.mp3', '**/*.ogg'],
   server: {
     hmr: {
       overlay: false, // Disable the error overlay
@@ -44,55 +44,5 @@ export default defineConfig({
     drop: ['debugger'],
     legalComments: 'none',
   },
-  plugins: [
-    vue(),
-    VitePWA({
-      includeAssets: [
-        'favicon.ico',
-        'robots.txt',
-        '*.png',
-        '*.jpg',
-        '*.svg',
-        '*.gif',
-        '*.glb',
-        '*.mp3',
-        '*.wav',
-        '*.ogg',
-      ],
-      registerType: 'prompt',
-      workbox: {
-        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
-        navigateFallback: '/index.html',
-        navigateFallbackDenylist: [/\.html$/, /\/api\//],
-        cleanupOutdatedCaches: true,
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'google-fonts-cache',
-              expiration: {
-                maxEntries: 20,
-                maxAgeSeconds: 31536000,
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-          {
-            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|glb|mp3|wav|ogg)$/,
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'assets-cache',
-              expiration: {
-                maxEntries: 300,
-                maxAgeSeconds: 2592000,
-              },
-            },
-          },
-        ],
-      },
-    }),
-  ],
+  plugins: [vue()],
 });
