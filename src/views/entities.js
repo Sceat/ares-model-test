@@ -121,8 +121,7 @@ function entity_spawner(
     }
 
     function set_colors({ color_1, color_2, color_3 }, renderer) {
-      if (!custom_colors)
-        throw new Error('This entity does not support custom colors');
+      if (!custom_colors) return;
 
       custom_colors.set_color1(color_1);
       custom_hat_colors?.set_color1(color_1);
