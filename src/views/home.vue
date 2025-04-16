@@ -227,7 +227,7 @@ onMounted(async () => {
   display flex
   width 100vw
   height 100vh
-  background-color #212121
+  background-color #262340
   canvas
     width 100%
     height 100%
